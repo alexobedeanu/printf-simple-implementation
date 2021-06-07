@@ -1,0 +1,48 @@
+TEMA 1 - IOCLA
+[325CC]Obedeanu Marian-Alexandru
+Pentru implementarea functiei printf am parcurs sirul 'format' dat ca parametru 
+in 'iocla_printf' pana am ajuns la elementul NULL folosind un while.
+In primul rand am verificat daca am '%' ca sa pot trata cazurile pentru
+tipurile de date ce urmau sa fie implementate.
+
+Pentru tipul de data 'int' am verificat egalitatea dintre 'd' si caracterul
+curent, m-am folosit de macro-ul va_arg din stdarg.h si am stocat 
+intr-o variabila numarul. Apoi am luat un char* auxiliar in care am salvat
+sirul returnat de functia int_to_char. In aceasta functie am verificat intial
+daca numarul meu este 0, am returnat un sir care continea doar 0. Dupa care,
+am verificat daca numarul este mai mic decat 0, l-am facut pozitiv pentru a
+nu ma incurca minusul in operatiile de modulo/impartire. Am construit noul sir
+cu numarul inversat, si m-am folosit de o functie de reverse(pentru care am
+cautat pe internet, deoarece in functiile facute de mine aparea un strlen
+ciudat al sirului, am gasit-o pe stackoverflow). Daca numarul este negativ,
+pun '-' pe ultima pozitie a sirului inainte sa fie inversat. De asemenea,
+in aceasta functie am verificat si daca numarul este INT_MIN din limits.h, iar
+in acest caz l-am facut INT_MAX (deoarece nu puteam doar sa-l inmultesc cu -1
+pentru ca era mai mare cu 1 decat INT_MAX) si am dat variabilei check valoarea
+1 pentru a putea ulterior sa adun 1 la ultimul caracter al sirului inversat ca
+sa coincidat cu valoarea lui INT_MIN.
+
+Pentru unsigned int am luat o variabila de tip unsigned si am folosit o functie
+aproape identica cu int_to_char.
+
+Pentru tipul de data hexazecimala am procedat ca la precendetele, doar ca am
+folosit o functie care imi converteste numarul in baza 16. Aceasta functie este
+inspirata de pe geeksforgeeks, dar am adaptat-o pentru ce aveam nevoie in tema.
+Aici am luat un sir in care mi-am salvat toate ciferele de la 0 la 9 + literele
+de la a la f in ordine. Fiecarui element sirul ce trebuia returnat i-am dat
+valoarea restului impartirii numarului la 16, dupa care am impartit nr la 16
+pentru a continua algoritmul. Daca numarul este mai mic decat 0 i-am scos
+semnul folosind unsigned int si am aplicat acelasi algoritm. Dupa care am
+inversat sirul
+
+Pentru caractere am luat initial caracterul intr-un 'int' si l-am castat castat
+intr-un char pentru a-l putea afisa corect, fara warning-uri.
+
+Pentru siruri am luat un char* pe care l-am afisat.
+
+La escaparea unui caracter am verificat sa am doua '%' consecutive si am afisat
+un '%' si al treilea caracter din acest subsir de 3 caractere(de ex. "%%d").
+Iar pentru asta am verificat ca al 3-lea caracter sa nu fie '%' pentru a nu
+aparea cazuri in care aceasta escapare sa nu functioneze.
+De fiecare data cand am afisat un caracter/sir am adunat 1/lungimea sirului
+in numarul de caractere care trebuia returnat.
